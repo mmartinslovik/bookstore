@@ -5,7 +5,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
@@ -13,6 +15,8 @@ import java.util.Set;
 @Table(name = "books")
 @Data
 public class Book extends NamedEntity {
+
+    private boolean available;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -26,4 +30,6 @@ public class Book extends NamedEntity {
     @JoinColumn(name = "department_id")
     private Department department;
 
+    @ManyToMany(mappedBy = "books")
+    List<Order> orders = new ArrayList<>();
 }
