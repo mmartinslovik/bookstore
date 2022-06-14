@@ -1,8 +1,10 @@
 package com.example.bookstore.domain;
 
 import com.example.bookstore.model.NamedEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.Set;
 @Entity
 @Table(name = "books")
 @Data
+@NoArgsConstructor
 public class Book extends NamedEntity {
 
     private boolean available;
@@ -32,4 +35,11 @@ public class Book extends NamedEntity {
 
     @ManyToMany(mappedBy = "books")
     List<Order> orders = new ArrayList<>();
+
+    public Book(String name, boolean available, Set<Author> authors, Department department) {
+        super(name);
+        this.available = available;
+        this.authors = authors;
+        this.department = department;
+    }
 }

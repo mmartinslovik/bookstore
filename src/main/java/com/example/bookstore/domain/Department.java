@@ -12,4 +12,7 @@ import javax.persistence.*;
 @Data
 public class Department extends NamedEntity {
 
+    public Department(String name) {
+        super(name);
+    }
 }

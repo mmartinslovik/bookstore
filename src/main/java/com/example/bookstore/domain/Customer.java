@@ -1,8 +1,7 @@
 package com.example.bookstore.domain;
 
 import com.example.bookstore.model.BaseEntity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -15,6 +14,8 @@ import java.util.List;
 @Entity
 @Table(name = "customers")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Customer extends BaseEntity {
 
     private String firstName;
