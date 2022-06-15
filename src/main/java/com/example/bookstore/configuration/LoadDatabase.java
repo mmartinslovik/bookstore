@@ -33,7 +33,7 @@ public class LoadDatabase {
             departmentRepository.save(department);
 
             Set<Book> books = new HashSet<>();
-            Book book = new Book("1984", true, authors, department);
+            Book book = new Book("1984", true, department, author);
             books.add(book);
             bookRepository.saveAll(books);
 

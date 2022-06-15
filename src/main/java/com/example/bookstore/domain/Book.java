@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -36,10 +38,17 @@ public class Book extends NamedEntity {
     @ManyToMany(mappedBy = "books")
     List<Order> orders = new ArrayList<>();
 
-    public Book(String name, boolean available, Set<Author> authors, Department department) {
+    public Book(String name, boolean available, Department department, Author... authors) {
         super(name);
         this.available = available;
-        this.authors = authors;
         this.department = department;
+        this.authors = Stream.of(authors).collect(Collectors.toSet());
+    }
+
+    public Book(String name, boolean available, Department department, Set<Author> authors) {
+        super(name);
+        this.available = available;
+        this.department = department;
+        this.authors = authors;
     }
 }
