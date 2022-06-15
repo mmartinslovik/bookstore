@@ -31,11 +31,11 @@ public class Book extends NamedEntity {
     )
     private Set<Author> authors = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @ManyToMany(mappedBy = "books")
+    @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
     List<Order> orders = new ArrayList<>();
 
     public Book(String name, boolean available, Department department, Author... authors) {

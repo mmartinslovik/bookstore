@@ -26,7 +26,7 @@ public class LoadDatabase {
                                    CustomerRepository customerRepository, DepartmentRepository departmentRepository) {
         return args -> {
             Set<Author> authors = new HashSet<>();
-            Author author = new Author("George", "Orwell", null);
+            Author author = new Author("George", "Orwell");
             authors.add(author);
 
             Department department = new Department("Orwell");

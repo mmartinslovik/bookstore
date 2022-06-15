@@ -11,14 +11,16 @@ import java.util.Set;
 @Entity
 @Table(name = "authors")
 @Data
+@RequiredArgsConstructor
 @NoArgsConstructor
-@AllArgsConstructor
 public class Author extends BaseEntity {
 
     @Column(nullable = false)
+    @NonNull
     private String firstName;
 
     @Column(nullable = false)
+    @NonNull
     private String lastName;
 
     @ManyToMany(mappedBy = "authors")
