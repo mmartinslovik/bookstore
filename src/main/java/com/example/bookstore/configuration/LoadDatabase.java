@@ -11,9 +11,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Configuration
 public class LoadDatabase {
@@ -22,6 +25,7 @@ public class LoadDatabase {
     private final Faker faker = new Faker();
 
     @Bean
+    @Transactional
     CommandLineRunner initDatabase(AuthorRepository authorRepository, BookRepository bookRepository,
                                    CustomerRepository customerRepository, DepartmentRepository departmentRepository) {
         return args -> {
@@ -30,7 +34,6 @@ public class LoadDatabase {
             authors.add(author);
 
             Department department = new Department("Orwell");
-            departmentRepository.save(department);
 
             Set<Book> books = new HashSet<>();
             Book book = new Book("1984", true, department, author);

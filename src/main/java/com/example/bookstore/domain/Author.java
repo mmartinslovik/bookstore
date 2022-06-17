@@ -13,6 +13,7 @@ import java.util.Set;
 @Data
 @RequiredArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Author extends BaseEntity {
 
     @Column(nullable = false)
