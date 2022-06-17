@@ -18,6 +18,8 @@ import java.util.List;
 @AllArgsConstructor
 public class Customer extends BaseEntity {
 
+    private static final long serialVersionUID = 9212101535368994882L;
+
     private String firstName;
 
     private String lastName;

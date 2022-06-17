@@ -1,6 +1,7 @@
 package com.example.bookstore.domain;
 
 import com.example.bookstore.model.NamedEntity;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,12 @@ import java.util.stream.Stream;
 @Table(name = "books")
 @Data
 @NoArgsConstructor
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Book extends NamedEntity {
+
+    private static final long serialVersionUID = 8480439267773089700L;
 
     private boolean available;
 
@@ -29,10 +35,11 @@ public class Book extends NamedEntity {
         joinColumns = @JoinColumn(name = "book_id"),
         inverseJoinColumns = @JoinColumn(name = "author_id")
     )
-    private Set<Author> authors = new HashSet<>();
+    private List<Author> authors = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "department_id")
+    @JsonIgnore
     private Department department;
 
     @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
@@ -42,10 +49,10 @@ public class Book extends NamedEntity {
         super(name);
         this.available = available;
         this.department = department;
-        this.authors = Stream.of(authors).collect(Collectors.toSet());
+        this.authors = Stream.of(authors).collect(Collectors.toList());
     }
 
-    public Book(String name, boolean available, Department department, Set<Author> authors) {
+    public Book(String name, boolean available, Department department, List<Author> authors) {
         super(name);
         this.available = available;
         this.department = department;

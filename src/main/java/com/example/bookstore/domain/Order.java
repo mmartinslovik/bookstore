@@ -14,6 +14,8 @@ import java.util.List;
 @Data
 public class Order extends BaseEntity {
 
+    private static final long serialVersionUID = 3262227359920384237L;
+
     private String description;
 
     private Status status;

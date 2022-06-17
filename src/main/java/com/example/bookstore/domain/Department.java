@@ -15,6 +15,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class Department extends NamedEntity {
 
+    private static final long serialVersionUID = 4169378839360213878L;
+
     @Column(unique = true)
     @NonNull
     private String name;
