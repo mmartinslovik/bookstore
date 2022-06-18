@@ -34,6 +34,11 @@ public class BookService implements IService<Book> {
     }
 
     @Override
+    public void deleteById(Long id) {
+        bookRepository.deleteById(id);
+    }
+
+    @Override
     public boolean existById(Long id) {
         return bookRepository.existsById(id);
     }

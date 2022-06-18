@@ -11,6 +11,8 @@ public interface IService<T> {
 
     void deleteAll(Iterable<T> entities);
 
+    void deleteById(Long id);
+
     boolean existById(Long id);
 
     List<T> findAll();
