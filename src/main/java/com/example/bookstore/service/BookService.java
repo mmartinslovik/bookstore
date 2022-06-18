@@ -5,6 +5,7 @@ import com.example.bookstore.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,6 +36,11 @@ public class BookService implements IService<Book> {
     @Override
     public boolean existById(Long id) {
         return bookRepository.existsById(id);
+    }
+
+    @Override
+    public List<Book> findAll() {
+        return bookRepository.findAll();
     }
 
     @Override

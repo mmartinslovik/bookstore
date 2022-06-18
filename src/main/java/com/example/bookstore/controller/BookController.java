@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -25,7 +26,12 @@ public class BookController {
     Book findById(@PathVariable Long id) {
         return bookService.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource"));
-    };
+    }
+
+    @GetMapping("/books")
+    List<Book> findAll() {
+        return bookService.findAll();
+    }
 
 
 }

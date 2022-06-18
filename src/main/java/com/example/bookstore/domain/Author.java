@@ -19,9 +19,6 @@ import java.util.Set;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
 public class Author extends BaseEntity {
 
     private static final long serialVersionUID = -7550643129982234354L;
@@ -35,5 +32,6 @@ public class Author extends BaseEntity {
     private String lastName;
 
     @ManyToMany(mappedBy = "authors")
+    @JsonBackReference
     private List<Book> books = new ArrayList<>();
 }

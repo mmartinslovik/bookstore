@@ -1,5 +1,6 @@
 package com.example.bookstore.service;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IService<T> {
@@ -11,6 +12,8 @@ public interface IService<T> {
     void deleteAll(Iterable<T> entities);
 
     boolean existById(Long id);
+
+    List<T> findAll();
 
     Iterable<T> findAllById(Iterable<Long> ids);
 

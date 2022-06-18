@@ -20,9 +20,6 @@ import java.util.stream.Stream;
 @Table(name = "books")
 @Data
 @NoArgsConstructor
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
 public class Book extends NamedEntity {
 
     private static final long serialVersionUID = 8480439267773089700L;
@@ -35,14 +32,16 @@ public class Book extends NamedEntity {
         joinColumns = @JoinColumn(name = "book_id"),
         inverseJoinColumns = @JoinColumn(name = "author_id")
     )
+    @JsonManagedReference
     private List<Author> authors = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "department_id")
-    @JsonIgnore
+    @JsonManagedReference
     private Department department;
 
     @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
+    @JsonIgnore
     List<Order> orders = new ArrayList<>();
 
     public Book(String name, boolean available, Department department, Author... authors) {

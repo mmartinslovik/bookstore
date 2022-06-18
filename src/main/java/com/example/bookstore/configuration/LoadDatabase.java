@@ -33,7 +33,7 @@ public class LoadDatabase {
             Author author = new Author("George", "Orwell");
             authors.add(author);
 
-            Department department = new Department("Orwell");
+            Department department = new Department("Politics");
 
             Set<Book> books = new HashSet<>();
             Book book = new Book("1984", true, department, author);

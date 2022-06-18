@@ -1,6 +1,7 @@
 package com.example.bookstore.domain;
 
 import com.example.bookstore.model.NamedEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,5 +23,6 @@ public class Department extends NamedEntity {
     private String name;
 
     @OneToMany(mappedBy = "department")
+    @JsonBackReference
     private List<Book> books = new ArrayList<>();
 }
