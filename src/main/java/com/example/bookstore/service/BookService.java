@@ -59,7 +59,11 @@ public class BookService implements IService<Book> {
     }
 
     public List<Book> findAllByAvailableIsTrue() {
-        return  bookRepository.findAllByAvailableIsTrue();
+        return bookRepository.findAllByAvailableIsTrue();
+    }
+
+    public List<Book> findByName(String name) {
+        return bookRepository.findByName(name);
     }
 
     @Override
