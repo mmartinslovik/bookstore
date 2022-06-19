@@ -58,6 +58,10 @@ public class BookService implements IService<Book> {
         return bookRepository.findById(id);
     }
 
+    public List<Book> findAllByAvailableIsTrue() {
+        return  bookRepository.findAllByAvailableIsTrue();
+    }
+
     @Override
     public Book save(Book entity) {
         return bookRepository.save(entity);

@@ -47,6 +47,16 @@ public class BookController {
                 linkTo(methodOn(BookController.class).getAll()).withSelfRel());
     }
 
+    @GetMapping("/books/available")
+    CollectionModel<EntityModel<Book>> getAllAvailable() {
+        List<EntityModel<Book>> books = bookService.findAllByAvailableIsTrue().stream()
+                .map(bookModelAssembler::toModel)
+                .collect(Collectors.toList());
+
+        return CollectionModel.of(books,
+                linkTo(methodOn(BookController.class).getAllAvailable()).withSelfRel());
+    }
+
     @PostMapping("/books")
     ResponseEntity<?> createBook(@RequestBody Book book) {
         EntityModel<Book> entityModel = bookModelAssembler.toModel(bookService.save(book));
