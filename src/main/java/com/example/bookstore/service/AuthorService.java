@@ -66,6 +66,10 @@ public class AuthorService implements IService<Author> {
         return authorRepository.findByLastName(lastName);
     }
 
+    public List<Author> findAuthorsByBooksId(Long bookId) {
+        return authorRepository.findAuthorsByBooksId(bookId);
+    }
+
     @Override
     public Author save(Author entity) {
         return authorRepository.save(entity);
