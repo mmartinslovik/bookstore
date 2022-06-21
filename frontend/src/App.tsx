@@ -3,21 +3,25 @@ import './App.css';
 import axios from "axios";
 
 function App() {
-  const [books, setBooks] = useState(null)
+    const [books, setBooks] = useState(null)
 
-  useEffect(() => {
-    axios.get("/books").then(response => {
-      setBooks(response.data)
-    })
-  }, [])
+    const handleBooks = () => {
+        axios
+            .get("/books")
+            .then(response => {
+                setBooks(response.data)
+            })
+    }
 
-  if (!books) return null
-
-  return (
-    <div>
-      {JSON.stringify(books)}
-    </div>
-  );
+    return (
+        <div>
+            <h1 className="text-3xl font-bold underline">
+                Hello world!
+            </h1>
+            <button onClick={() => handleBooks()}>GET BOOKS</button>
+            {books && JSON.stringify(books)}
+        </div>
+    );
 }
 
 export default App;
