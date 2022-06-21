@@ -1,9 +1,6 @@
 package com.example.bookstore.configuration;
 
-import com.example.bookstore.domain.Author;
-import com.example.bookstore.domain.Book;
-import com.example.bookstore.domain.Customer;
-import com.example.bookstore.domain.Department;
+import com.example.bookstore.domain.*;
 import com.example.bookstore.repository.*;
 import com.github.javafaker.Faker;
 import org.slf4j.Logger;
@@ -14,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -27,7 +25,8 @@ public class LoadDatabase {
     @Bean
     @Transactional
     CommandLineRunner initDatabase(AuthorRepository authorRepository, BookRepository bookRepository,
-                                   CustomerRepository customerRepository, DepartmentRepository departmentRepository) {
+                                   CustomerRepository customerRepository, DepartmentRepository departmentRepository,
+                                   OrderRepository orderRepository) {
         return args -> {
             Set<Author> authors = new HashSet<>();
             Author author = new Author("George", "Orwell");
@@ -43,6 +42,10 @@ public class LoadDatabase {
             for (int i = 0; i < 10; i++) {
                 customerRepository.save(new Customer(faker.name().firstName(), faker.name().lastName(), null));
             }
+
+            Customer customer = customerRepository.findAll().stream().findFirst().get();
+            Order order = new Order("order of 1984", Status.IN_PROGRESS, List.of(book), customer);
+            orderRepository.save(order);
         };
     }
 }

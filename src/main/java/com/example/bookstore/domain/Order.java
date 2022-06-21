@@ -1,8 +1,7 @@
 package com.example.bookstore.domain;
 
 import com.example.bookstore.model.BaseEntity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,6 +11,8 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Order extends BaseEntity {
 
     private static final long serialVersionUID = 3262227359920384237L;
@@ -27,4 +28,8 @@ public class Order extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "book_id")
     )
     private List<Book> books = new ArrayList<>();
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Customer customer;
+
 }
