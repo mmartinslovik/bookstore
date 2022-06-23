@@ -1,9 +1,6 @@
 package com.example.bookstore.configuration;
 
-import com.example.bookstore.domain.Author;
-import com.example.bookstore.domain.Book;
-import com.example.bookstore.domain.Customer;
-import com.example.bookstore.domain.Department;
+import com.example.bookstore.domain.*;
 import com.example.bookstore.repository.*;
 import com.github.javafaker.Faker;
 import org.slf4j.Logger;
@@ -28,7 +25,8 @@ public class LoadDatabase {
     @Bean
     @Transactional
     CommandLineRunner initDatabase(AuthorRepository authorRepository, BookRepository bookRepository,
-                                   CustomerRepository customerRepository, DepartmentRepository departmentRepository) {
+                                   CustomerRepository customerRepository, DepartmentRepository departmentRepository,
+                                   OrderRepository orderRepository) {
         return args -> {
             Author author = new Author("George", "Orwell");
 
@@ -41,6 +39,10 @@ public class LoadDatabase {
                 customerRepository.save(new Customer(faker.name().firstName(), faker.name().lastName(),
                         faker.internet().emailAddress(), null));
             }
+
+            Customer customer = customerRepository.findAll().stream().findFirst().get();
+
+            orderRepository.save(new Order("Order of 1984", Status.IN_PROGRESS, List.of(book), customer));
         };
     }
 }

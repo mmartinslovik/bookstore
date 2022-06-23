@@ -26,7 +26,6 @@ public class Customer extends BaseEntity {
 
     private String email;
 
-    @OneToMany
-    @JoinColumn(name = "customer_id")
+    @OneToMany(mappedBy = "customer")
     private List<Order> orders = new ArrayList<>();
 }
