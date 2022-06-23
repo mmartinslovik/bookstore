@@ -35,7 +35,8 @@ public class BookServiceTest {
 
     @Test
     public void testSave() {
-        Book book = bookService.save(new Book("Animal farm", false, null));
+        Book book = bookService.save(new Book("Animal farm", false, 10.0, null,
+                null));
 
         assertThat(bookService.findById(book.getId())).isNotEmpty();
     }

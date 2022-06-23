@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -29,19 +30,16 @@ public class LoadDatabase {
     CommandLineRunner initDatabase(AuthorRepository authorRepository, BookRepository bookRepository,
                                    CustomerRepository customerRepository, DepartmentRepository departmentRepository) {
         return args -> {
-            Set<Author> authors = new HashSet<>();
             Author author = new Author("George", "Orwell");
-            authors.add(author);
 
             Department department = new Department("Politics");
 
-            Set<Book> books = new HashSet<>();
-            Book book = new Book("1984", true, department, author);
-            books.add(book);
-            bookRepository.saveAll(books);
+            Book book = new Book("1984", true, 10.0, department, List.of(author));
+            bookRepository.save(book);
 
             for (int i = 0; i < 10; i++) {
-                customerRepository.save(new Customer(faker.name().firstName(), faker.name().lastName(), null));
+                customerRepository.save(new Customer(faker.name().firstName(), faker.name().lastName(),
+                        faker.internet().emailAddress(), null));
             }
         };
     }

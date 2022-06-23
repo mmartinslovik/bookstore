@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -30,8 +33,8 @@ public class BookRepositoryTest {
     @Test
     public void testSaveThenFindByName() {
         String name = faker.book().title();
-        bookRepository.save(new Book(name, true, new Department(faker.book().genre()),
-                new Author(faker.name().firstName(), faker.name().lastName())));
+        bookRepository.save(new Book(name, true, 10.0, new Department(faker.book().genre()),
+                List.of(new Author(faker.name().firstName(), faker.name().lastName()))));
         assertThat(bookRepository.findByName(name)).isNotNull();
     }
 }

@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -22,6 +20,8 @@ public class Book extends NamedEntity {
     private static final long serialVersionUID = 8480439267773089700L;
 
     private boolean available;
+
+    private Double price;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -39,16 +39,10 @@ public class Book extends NamedEntity {
     @JsonIgnore
     List<Order> orders = new ArrayList<>();
 
-    public Book(String name, boolean available, Department department, Author... authors) {
+    public Book(String name, boolean available, Double price, Department department, List<Author> authors) {
         super(name);
         this.available = available;
-        this.department = department;
-        this.authors = Stream.of(authors).collect(Collectors.toList());
-    }
-
-    public Book(String name, boolean available, Department department, List<Author> authors) {
-        super(name);
-        this.available = available;
+        this.price = price;
         this.department = department;
         this.authors = authors;
     }

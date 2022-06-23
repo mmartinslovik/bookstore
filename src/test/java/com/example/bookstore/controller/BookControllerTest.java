@@ -35,7 +35,7 @@ public class BookControllerTest {
 
     @Test
     public void testGetById() throws Exception {
-        Book book = new Book("1984", true, null);
+        Book book = new Book("1984", true, 10.0, null, null);
         book.setId(1L);
 
         when(bookService.findById(1L)).thenReturn(Optional.of(book));

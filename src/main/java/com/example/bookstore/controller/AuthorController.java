@@ -77,4 +77,32 @@ public class AuthorController {
                 .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
                 .body(entityModel);
     }
+
+    @PutMapping("authors/{id}")
+    ResponseEntity<?> updateAssignedAuthor(@RequestBody Author newAuthor, @PathVariable Long id) {
+        Author updatedAuthor = authorService.findById(id)
+                .map(author -> {
+                    author.setFirstName(newAuthor.getFirstName());
+                    author.setLastName(newAuthor.getLastName());
+                    author.setBooks(newAuthor.getBooks());
+                    return authorService.save(author);
+                })
+                .orElseGet(() -> {
+                    newAuthor.setId(id);
+                    return authorService.save(newAuthor);
+                });
+
+        EntityModel<Author> entityModel = authorModelAssembler.toModel(updatedAuthor);
+
+        return ResponseEntity
+                .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
+                .body(entityModel);
+    }
+
+    @DeleteMapping("/authors/{id}")
+    ResponseEntity<?> deleteAuthor(@PathVariable Long id) {
+        authorService.deleteById(id);
+
+        return ResponseEntity.noContent().build();
+    }
 }
