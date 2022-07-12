@@ -10,11 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Configuration
 public class LoadDatabase {
@@ -25,7 +21,7 @@ public class LoadDatabase {
     @Bean
     @Transactional
     CommandLineRunner initDatabase(AuthorRepository authorRepository, BookRepository bookRepository,
-                                   CustomerRepository customerRepository, DepartmentRepository departmentRepository,
+                                   UserRepository userRepository, DepartmentRepository departmentRepository,
                                    OrderRepository orderRepository) {
         return args -> {
             Author author = new Author("George", "Orwell");
@@ -36,13 +32,12 @@ public class LoadDatabase {
             bookRepository.save(book);
 
             for (int i = 0; i < 10; i++) {
-                customerRepository.save(new Customer(faker.name().firstName(), faker.name().lastName(),
-                        faker.internet().emailAddress(), null));
+                userRepository.save(new User(faker.internet().emailAddress(), "123456", null));
             }
 
-            Customer customer = customerRepository.findAll().stream().findFirst().get();
+            User user = userRepository.findAll().stream().findFirst().get();
 
-            orderRepository.save(new Order("Order of 1984", Status.IN_PROGRESS, List.of(book), customer));
+            orderRepository.save(new Order("Order of 1984", Status.IN_PROGRESS, List.of(book), user));
         };
     }
 }
