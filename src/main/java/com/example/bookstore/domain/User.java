@@ -1,6 +1,7 @@
 package com.example.bookstore.domain;
 
 import com.example.bookstore.model.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -26,5 +27,6 @@ public class User extends BaseEntity {
     private String password;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Order> orders = new ArrayList<>();
 }

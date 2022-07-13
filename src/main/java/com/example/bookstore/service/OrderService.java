@@ -2,6 +2,7 @@ package com.example.bookstore.service;
 
 import com.example.bookstore.domain.Order;
 import com.example.bookstore.domain.Status;
+import com.example.bookstore.domain.User;
 import com.example.bookstore.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,6 +68,14 @@ public class OrderService implements IService<Order> {
     @Override
     public Optional<Order> findById(Long id) {
         return orderRepository.findById(id);
+    }
+
+    public List<Order> findByUser(User user) {
+        return orderRepository.findByUser(user);
+    }
+
+    public Optional<Order> findByIdAndUser(Long id, User user) {
+        return orderRepository.findByIdAndUser(id, user);
     }
 
     @Override

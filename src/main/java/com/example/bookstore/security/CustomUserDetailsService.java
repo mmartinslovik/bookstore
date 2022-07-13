@@ -1,31 +1,30 @@
 package com.example.bookstore.security;
 
 import com.example.bookstore.domain.User;
-import com.example.bookstore.repository.UserRepository;
+import com.example.bookstore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collections;
-import java.util.Optional;
 
 @Component
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> userResult = Optional.ofNullable(userRepository.findByEmail(email));
+        User user = userService.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(email + " not found"));
 
-        if (userResult.isEmpty())
-            throw new UsernameNotFoundException("Customer with " + email + " not found.");
-
-        User user = userResult.get();
         return new org.springframework.security.core.userdetails.User(
                 email,
                 user.getPassword(),

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private CustomUserDetailsService userDetailsService;
 
     @Autowired
     private JWTUtil jwtUtil;
@@ -39,6 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("books/**").permitAll()
                 .antMatchers("authors/**").permitAll()
                 .antMatchers("users/**").hasRole("USER")
+                .antMatchers("orders/**").hasRole("USER")
                 .and()
                 .userDetailsService(userDetailsService)
                 .exceptionHandling()
