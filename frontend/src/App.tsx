@@ -1,16 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
-import Books from "./components/Books";
+import BooksLoader from "./components/BooksLoader";
 import {Routes, Route} from "react-router-dom";
+import {Navbar} from "./components/Navbar";
 
 
 function App() {
 
     return (
-        <Routes>
-            <Route path="/books" element={<Books />} />
-        </Routes>
-    );
+        <div className="italic">Hi</div>
+    )
 }
 
 export default App;
