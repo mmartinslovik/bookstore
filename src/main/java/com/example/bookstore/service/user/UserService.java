@@ -61,6 +61,11 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    @Override
     public User save(User entity) {
         return userRepository.save(entity);
     }

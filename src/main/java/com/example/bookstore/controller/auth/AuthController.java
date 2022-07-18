@@ -4,6 +4,7 @@ import com.example.bookstore.domain.User;
 import com.example.bookstore.security.JWTUtil;
 import com.example.bookstore.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collections;
 import java.util.Map;
@@ -36,6 +38,10 @@ public class AuthController {
     public Map<String, Object> registerHandler(@RequestBody User user) {
         String encodedPass = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPass);
+
+        if (userService.existsByEmail(user.getEmail())) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account already exists.");
+        }
         user = userService.save(user);
         String token = jwtUtil.generateToken(user.getEmail());
 
