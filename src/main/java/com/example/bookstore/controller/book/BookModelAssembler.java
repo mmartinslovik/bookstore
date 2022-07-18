@@ -1,4 +1,4 @@
-package com.example.bookstore.controller;
+package com.example.bookstore.controller.book;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 

@@ -1,12 +1,12 @@
-package com.example.bookstore.controller;
+package com.example.bookstore.controller.order;
 
 import com.example.bookstore.domain.Book;
 import com.example.bookstore.domain.Order;
 import com.example.bookstore.domain.Status;
 import com.example.bookstore.domain.User;
-import com.example.bookstore.service.BookService;
-import com.example.bookstore.service.OrderService;
-import com.example.bookstore.service.UserService;
+import com.example.bookstore.service.book.BookService;
+import com.example.bookstore.service.order.IOrderService;
+import com.example.bookstore.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -30,7 +30,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class OrderController {
 
     @Autowired
-    private OrderService orderService;
+    private IOrderService orderService;
 
     @Autowired
     private BookService bookService;

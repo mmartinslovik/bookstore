@@ -1,8 +1,8 @@
-package com.example.bookstore.controller;
+package com.example.bookstore.controller.auth;
 
 import com.example.bookstore.domain.User;
-import com.example.bookstore.repository.UserRepository;
 import com.example.bookstore.security.JWTUtil;
+import com.example.bookstore.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,7 +21,7 @@ import java.util.Map;
 public class AuthController {
 
     @Autowired
-    private UserRepository userRepository;
+    private IUserService userService;
 
     @Autowired
     private JWTUtil jwtUtil;
@@ -36,7 +36,7 @@ public class AuthController {
     public Map<String, Object> registerHandler(@RequestBody User user) {
         String encodedPass = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPass);
-        user = userRepository.save(user);
+        user = userService.save(user);
         String token = jwtUtil.generateToken(user.getEmail());
 
         return Collections.singletonMap("jwt-token", token);

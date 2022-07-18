@@ -1,9 +1,9 @@
-package com.example.bookstore.controller;
+package com.example.bookstore.controller.author;
 
 import com.example.bookstore.domain.Author;
 import com.example.bookstore.domain.Book;
-import com.example.bookstore.service.AuthorService;
-import com.example.bookstore.service.BookService;
+import com.example.bookstore.service.book.BookService;
+import com.example.bookstore.service.author.IAuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -22,14 +22,14 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 public class AuthorController {
 
-    private final AuthorService authorService;
+    private final IAuthorService authorService;
 
     private final AuthorModelAssembler authorModelAssembler;
 
     private final BookService bookService;
 
     @Autowired
-    public AuthorController(AuthorService authorService, AuthorModelAssembler authorModelAssembler,
+    public AuthorController(IAuthorService authorService, AuthorModelAssembler authorModelAssembler,
                             BookService bookService) {
         this.authorService = authorService;
         this.authorModelAssembler = authorModelAssembler;

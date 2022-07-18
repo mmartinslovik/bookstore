@@ -1,4 +1,4 @@
-package com.example.bookstore.controller;
+package com.example.bookstore.controller.author;
 
 import com.example.bookstore.domain.Author;
 import org.springframework.hateoas.EntityModel;

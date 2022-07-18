@@ -1,9 +1,9 @@
-package com.example.bookstore.controller;
+package com.example.bookstore.controller.book;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import com.example.bookstore.domain.Book;
-import com.example.bookstore.service.BookService;
+import com.example.bookstore.service.book.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -20,12 +20,12 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class BookController {
 
-    private final BookService bookService;
+    private final IBookService bookService;
 
     private final BookModelAssembler bookModelAssembler;
 
     @Autowired
-    BookController(BookService bookService, BookModelAssembler bookModelAssembler) {
+    BookController(IBookService bookService, BookModelAssembler bookModelAssembler) {
         this.bookService = bookService;
         this.bookModelAssembler = bookModelAssembler;
     }

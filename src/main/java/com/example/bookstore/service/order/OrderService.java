@@ -1,4 +1,4 @@
-package com.example.bookstore.service;
+package com.example.bookstore.service.order;
 
 import com.example.bookstore.domain.Order;
 import com.example.bookstore.domain.Status;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OrderService implements IService<Order> {
+public class OrderService implements IOrderService {
 
     private final OrderRepository orderRepository;
 
@@ -70,10 +70,12 @@ public class OrderService implements IService<Order> {
         return orderRepository.findById(id);
     }
 
+    @Override
     public List<Order> findByUser(User user) {
         return orderRepository.findByUser(user);
     }
 
+    @Override
     public Optional<Order> findByIdAndUser(Long id, User user) {
         return orderRepository.findByIdAndUser(id, user);
     }

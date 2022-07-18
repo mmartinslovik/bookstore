@@ -1,8 +1,7 @@
-package com.example.bookstore.controller;
+package com.example.bookstore.controller.user;
 
 import com.example.bookstore.domain.User;
-import com.example.bookstore.repository.UserRepository;
-import com.example.bookstore.service.UserService;
+import com.example.bookstore.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,7 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     @GetMapping()
     public User getUserDetails() {

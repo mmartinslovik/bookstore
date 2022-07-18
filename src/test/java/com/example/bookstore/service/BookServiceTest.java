@@ -1,6 +1,8 @@
 package com.example.bookstore.service;
 
 import com.example.bookstore.domain.Book;
+import com.example.bookstore.service.book.BookService;
+import com.example.bookstore.service.book.IBookService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BookServiceTest {
 
     @Autowired
-    private BookService bookService;
+    private IBookService bookService;
 
     @Test
     public void testFindByName() {

@@ -1,7 +1,8 @@
-package com.example.bookstore.service;
+package com.example.bookstore.service.book;
 
 import com.example.bookstore.domain.Book;
 import com.example.bookstore.repository.BookRepository;
+import com.example.bookstore.service.book.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BookService implements IService<Book> {
+public class BookService implements IBookService {
 
     private final BookRepository bookRepository;
 
@@ -58,10 +59,12 @@ public class BookService implements IService<Book> {
         return bookRepository.findById(id);
     }
 
+    @Override
     public List<Book> findAllByAvailableIsTrue() {
         return bookRepository.findAllByAvailableIsTrue();
     }
 
+    @Override
     public List<Book> findByName(String name) {
         return bookRepository.findByName(name);
     }

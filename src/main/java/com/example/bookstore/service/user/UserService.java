@@ -1,7 +1,8 @@
-package com.example.bookstore.service;
+package com.example.bookstore.service.user;
 
 import com.example.bookstore.domain.User;
 import com.example.bookstore.repository.UserRepository;
+import com.example.bookstore.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,44 +10,44 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService implements IService<User> {
+public class UserService implements IUserService {
 
     @Autowired
     private UserRepository userRepository;
 
     @Override
     public long count() {
-        return 0;
+        return userRepository.count();
     }
 
     @Override
     public void delete(User entity) {
-
+        userRepository.delete(entity);
     }
 
     @Override
     public void deleteAll(Iterable<User> entities) {
-
+        userRepository.deleteAll(entities);
     }
 
     @Override
     public void deleteById(Long id) {
-
+        userRepository.deleteById(id);
     }
 
     @Override
     public boolean existById(Long id) {
-        return false;
+        return userRepository.existsById(id);
     }
 
     @Override
     public List<User> findAll() {
-        return null;
+        return userRepository.findAll();
     }
 
     @Override
     public Iterable<User> findAllById(Iterable<Long> ids) {
-        return null;
+        return userRepository.findAllById(ids);
     }
 
     @Override
@@ -54,17 +55,18 @@ public class UserService implements IService<User> {
         return userRepository.findById(id);
     }
 
+    @Override
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
     @Override
     public User save(User entity) {
-        return null;
+        return userRepository.save(entity);
     }
 
     @Override
     public Iterable<User> saveAll(Iterable<User> entities) {
-        return null;
+        return userRepository.saveAll(entities);
     }
 }

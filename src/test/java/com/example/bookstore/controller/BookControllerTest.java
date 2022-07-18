@@ -1,7 +1,8 @@
 package com.example.bookstore.controller;
 
+import com.example.bookstore.controller.book.BookModelAssembler;
 import com.example.bookstore.domain.Book;
-import com.example.bookstore.service.BookService;
+import com.example.bookstore.service.book.IBookService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class BookControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private BookService bookService;
+    private IBookService bookService;
 
     @MockBean
     private BookModelAssembler bookModelAssembler;
