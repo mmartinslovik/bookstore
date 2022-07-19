@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Navbar} from "./components/Navbar";
 import BooksLoader from "./components/BooksLoader";
+import SingleBookLoader from "./components/SingleBookLoader";
+import Order from "./components/Order";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,6 +19,8 @@ root.render(
           <Routes>
               <Route path="/" element={ <App /> } />
               <Route path="/books" element={ <BooksLoader /> } />
+              <Route path="/books/:id" element={ <SingleBookLoader /> } />
+              <Route path="/orders" element={ <Order /> } />
           </Routes>
       </BrowserRouter>
   </React.StrictMode>
