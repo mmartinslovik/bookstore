@@ -31,20 +31,6 @@ export default function Login({setToken}: LoginProps) {
 
 
     return (
-        // <form className="container" onSubmit={handleSubmit}>
-        //     <label>
-        //         <p>Username</p>
-        //         <input type="text" onChange={e => setEmail(e.target.value)}/>
-        //     </label>
-        //     <label>
-        //         <p>Password</p>
-        //         <input type="password" onChange={e => setPassword(e.target.value)}/>
-        //     </label>
-        //     <div>
-        //         <button type="submit">Submit</button>
-        //     </div>
-        // </form>
-
         <div className="flex justify-center my-2 mx-4 mt-4 md:mx-0">
             <form className="w-full max-w-xl bg-white border p-20 bg-opacity-10" onSubmit={handleSubmit}>
                 <div className="flex flex-wrap -mx-3 mb-6">
